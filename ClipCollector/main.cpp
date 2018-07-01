@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "widget.h"
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QRect>
@@ -6,8 +6,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
-    MainWindow w;
+    Widget w;
     w.show();
 
     QRect rect = QApplication::desktop()->screenGeometry();
