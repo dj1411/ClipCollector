@@ -1,5 +1,8 @@
 #include "widget.h"
 
+#include <QClipboard>
+#include <QDebug>
+
 Widget::Widget(QWidget *parent) : QWidget(parent) {
     /* setting the geometry for the main window */
     QRect rect = QApplication::desktop()->screenGeometry();
@@ -16,7 +19,13 @@ Widget::Widget(QWidget *parent) : QWidget(parent) {
         line->setFrameStyle(QFrame::HLine | QFrame::Sunken);
         layoutClip->addWidget(line);
     }
+
+    QObject::connect( QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(handleNewClip()) );
 }
 
 Widget::~Widget() {
+}
+
+void Widget::handleNewClip() {
+    qDebug() << "New Clip: " << QApplication::clipboard()->text();
 }

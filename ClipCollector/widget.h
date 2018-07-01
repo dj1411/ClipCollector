@@ -15,6 +15,9 @@ class Widget : public QWidget
     QVBoxLayout* layoutClip;
     QLabel* labelClip[NUM_CLIP];
 
+private slots:
+    void handleNewClip();
+
 public:
     Widget(QWidget *parent = 0);
     ~Widget();
