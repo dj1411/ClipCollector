@@ -1,11 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include <QLabel>
+#include <QVBoxLayout>
 
-class MainWindow : public QMainWindow
+class MainWindow : public QWidget
 {
     Q_OBJECT
+private:
+    static constexpr unsigned char MAX_CLIPS = 10;
+
+    QLabel* labelClip[MAX_CLIPS];
+    QVBoxLayout* layoutLabel;
 
 public:
     MainWindow(QWidget *parent = 0);
