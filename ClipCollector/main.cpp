@@ -3,14 +3,10 @@
 #include <QDesktopWidget>
 #include <QRect>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     Widget w;
     w.show();
-
-    QRect rect = QApplication::desktop()->screenGeometry();
-    w.setGeometry(rect.width() - 300, rect.height() - 400, 300, 400);
 
     return a.exec();
 }
