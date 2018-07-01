@@ -27,5 +27,10 @@ Widget::~Widget() {
 }
 
 void Widget::handleNewClip() {
-    qDebug() << "New Clip: " << QApplication::clipboard()->text();
+    qDebug() << "New clip: " << QApplication::clipboard()->text();
+
+    for( uint8_t i=NUM_CLIP-1; i!=0; i--) {
+        labelClip[i]->setText(labelClip[i-1]->text());
+    }
+    labelClip[0]->setText(QApplication::clipboard()->text());
 }
