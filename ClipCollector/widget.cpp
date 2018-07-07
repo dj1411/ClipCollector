@@ -30,20 +30,20 @@ Widget::Widget(QDialog *parent) : QDialog(parent) {
     updateLabel(0, QApplication::clipboard()->text());
 
     /* Listen to any clipboard event */
-//    QObject::connect( QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(slotNewClip()) );
+    QObject::connect( QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(slotNewClip()) );
 }
 
 Widget::~Widget() {
 }
 
 void Widget::slotNewClip() {
-//    /* push down each label */
-//    for( uint8_t i=NUM_CLIPS-1; i!=0; i--) {
-//        labelClip[i]->setText(labelClip[i-1]->text());
-//    }
+    /* push down each label */
+    for( uint8_t i=NUM_CLIPS-1; i>0; i--) {
+        updateLabel(i, strClip[i-1]);
+    }
 
-//    /* set the topmost label with clipboard content */
-//    labelClip[0]->setText(QApplication::clipboard()->text());
+    /* set the topmost label with clipboard content */
+    updateLabel(0, QApplication::clipboard()->text());
 }
 
 void Widget::updateLabel(uint8_t idx, QString str) {
