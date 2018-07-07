@@ -6,30 +6,28 @@
 #include <QPalette>
 
 Widget::Widget(QDialog *parent) : QDialog(parent) {
-    /* create the first clip */
+    /* creating placeholders for clips */
     layoutClip = new QVBoxLayout(this);
-    createLabel(0, QApplication::clipboard()->text());
+    for( uint8_t i=0; i<NUM_CLIPS; i++) {
+        labelClip[i] = new QLabel("label0");
+        layoutClip->addWidget(labelClip[i]);
+        line = new QFrame;
+        line->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+        layoutClip->addWidget(line);
+    }
 
     /* setting the geometry for the main window */
     QRect screen = QApplication::desktop()->screenGeometry();
     uint16_t heightTaskbar = screen.height() - QApplication::desktop()->availableGeometry().height();
-    uint16_t heightWindow = (labelClip[0]->sizeHint().height() + line->sizeHint().height()) * NUM_CLIPS;
+    uint16_t heightWindow = (labelClip[0]->sizeHint().height() + line->sizeHint().height() + HEIGHT_PADDING) * NUM_CLIPS;
     this->setGeometry(screen.width() - WIDTH_WINDOW,
                       screen.height() - heightWindow - heightTaskbar,
                       WIDTH_WINDOW,
                       heightWindow);
     this->setFixedSize(WIDTH_WINDOW, heightWindow);
 
-//    /* creating placeholders for clips */
-//    layoutClip = new QVBoxLayout(this);
-//    for( uint8_t i=0; i<NUM_CLIPS; i++) {
-//        labelClip[i] = new QLabel("label0");
-//        layoutClip->addWidget(labelClip[i]);
-
-//        line = new QFrame;
-//        line->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-//        layoutClip->addWidget(line);
-//    }
+    /* create the first clip */
+//    createLabel(0, QApplication::clipboard()->text());
 
     /* Listen to any clipboard event */
 //    QObject::connect( QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(slotNewClip()) );
