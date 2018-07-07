@@ -76,16 +76,22 @@ void Widget::keyPressEvent(QKeyEvent* event) {
     case Qt::Key_Up:
         if(idxSelectedClip > 0)
             idxSelectedClip--;
-        updateSelectedClip();
+        highlightSelectedClip();
         break;
 
     case Qt::Key_Down:
         if(idxSelectedClip < NUM_CLIPS-1)
             idxSelectedClip++;
-        updateSelectedClip();
+        highlightSelectedClip();
         break;
 
     case Qt::Key_Enter:
+    case Qt::Key_Return:
+        pushLabel(strClip[idxSelectedClip]);
+        idxSelectedClip = 0;
+        highlightSelectedClip();
+        QApplication::clipboard()->setText(strClip[idxSelectedClip]);
+        this->setWindowState(Qt::WindowMinimized);
         break;
 
     case Qt::Key_Escape:
@@ -98,11 +104,11 @@ void Widget::keyPressEvent(QKeyEvent* event) {
 }
 
 void Widget::focusInEvent(QFocusEvent* event) {
-    updateSelectedClip();
+    highlightSelectedClip();
     QDialog::focusInEvent(event);
 }
 
-void Widget::updateSelectedClip() {
+void Widget::highlightSelectedClip() {
     labelClip[idxSelectedClip]->setStyleSheet( "QLabel { color: blue }" );
     for( uint8_t i=0; i<NUM_CLIPS; i++) {
         if(i==idxSelectedClip)

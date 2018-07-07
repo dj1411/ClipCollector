@@ -29,7 +29,7 @@ public:
     void updateLabel(uint8_t idx, QString str);
     void keyPressEvent(QKeyEvent* event);
     void focusInEvent(QFocusEvent* event);
-    void updateSelectedClip();
+    void highlightSelectedClip();
 };
 
 #endif // WIDGET_H
