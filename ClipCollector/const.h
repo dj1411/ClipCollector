@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-static constexpr uint8_t NUM_CLIP = 10;
+static constexpr uint8_t NUM_CLIPS = 20;
 static constexpr uint8_t LENGTH_CLIP = 40;
 
 static constexpr uint16_t WIDTH_WINDOW = 300;

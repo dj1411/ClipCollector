@@ -14,8 +14,9 @@ class Widget : public QDialog
 {
 Q_OBJECT
     QVBoxLayout* layoutClip;
-    QLabel* labelClip[NUM_CLIP];
-    QString strClip[NUM_CLIP];
+    QLabel* labelClip[NUM_CLIPS];
+    QFrame* line;
+    QString strClip[NUM_CLIPS];
 
 private slots:
     void slotNewClip();

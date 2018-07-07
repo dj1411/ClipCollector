@@ -11,22 +11,20 @@ Widget::Widget(QDialog *parent) : QDialog(parent) {
     createLabel(0, QApplication::clipboard()->text());
 
     /* setting the geometry for the main window */
-    QRect screen = QApplication::desktop()->screenGeometry();
-    uint16_t heightTaskbar = screen.height() - QApplication::desktop()->availableGeometry().height();
-    this->setGeometry(screen.width() - WIDTH_WINDOW,
-                      screen.height() - HEIGHT_WINDOW - heightTaskbar,
-                      WIDTH_WINDOW,
-                      HEIGHT_WINDOW);
-    this->setFixedSize(WIDTH_WINDOW, HEIGHT_WINDOW);
-
-    qDebug() << labelClip[0]->sizeHint().height();
+//    QRect screen = QApplication::desktop()->screenGeometry();
+//    uint16_t heightTaskbar = screen.height() - QApplication::desktop()->availableGeometry().height();
+//    uint16_t heightWindow = (labelClip[0]->sizeHint().height() + line->sizeHint().height()) * NUM_CLIPS;
+//    this->setGeometry(screen.width() - WIDTH_WINDOW,
+//                      screen.height() - heightWindow - heightTaskbar,
+//                      WIDTH_WINDOW,
+//                      heightWindow);
+//    this->setFixedSize(WIDTH_WINDOW, heightWindow);
 
 //    /* creating placeholders for clips */
 //    layoutClip = new QVBoxLayout(this);
-//    for( uint8_t i=0; i<NUM_CLIP; i++) {
+//    for( uint8_t i=0; i<NUM_CLIPS; i++) {
 //        labelClip[i] = new QLabel("label0");
 //        layoutClip->addWidget(labelClip[i]);
-////        qDebug() << labelClip[i]->sizeHint().height();
 
 //        line = new QFrame;
 //        line->setFrameStyle(QFrame::HLine | QFrame::Sunken);
@@ -34,7 +32,7 @@ Widget::Widget(QDialog *parent) : QDialog(parent) {
 //    }
 
     /* Listen to any clipboard event */
-    QObject::connect( QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(slotNewClip()) );
+//    QObject::connect( QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(slotNewClip()) );
 }
 
 Widget::~Widget() {
@@ -42,7 +40,7 @@ Widget::~Widget() {
 
 void Widget::slotNewClip() {
 //    /* push down each label */
-//    for( uint8_t i=NUM_CLIP-1; i!=0; i--) {
+//    for( uint8_t i=NUM_CLIPS-1; i!=0; i--) {
 //        labelClip[i]->setText(labelClip[i-1]->text());
 //    }
 
@@ -63,7 +61,7 @@ void Widget::createLabel(uint8_t idx, QString str) {
     /* display the string */
     labelClip[idx] = new QLabel(str);
     layoutClip->addWidget(labelClip[idx]);
-    QFrame* line = new QFrame;
+    line = new QFrame;
     line->setFrameStyle(QFrame::HLine | QFrame::Sunken);
     layoutClip->addWidget(line);
 }
