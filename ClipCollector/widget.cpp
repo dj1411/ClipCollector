@@ -9,7 +9,7 @@ Widget::Widget(QDialog *parent) : QDialog(parent) {
     /* creating placeholders for clips */
     layoutClip = new QVBoxLayout(this);
     for( uint8_t i=0; i<NUM_CLIPS; i++) {
-        labelClip[i] = new QLabel("label0");
+        labelClip[i] = new QLabel();
         layoutClip->addWidget(labelClip[i]);
         line = new QFrame;
         line->setFrameStyle(QFrame::HLine | QFrame::Sunken);
@@ -60,4 +60,27 @@ void Widget::updateLabel(uint8_t idx, QString str) {
 
     /* display the string */
     labelClip[idx]->setText(str);
+}
+
+void Widget::keyPressEvent(QKeyEvent* event) {
+    switch(event->key()) {
+    case Qt::Key_Up:
+        qDebug() << "UP";
+        break;
+
+    case Qt::Key_Down:
+        qDebug() << "DOWN";
+        break;
+
+    case Qt::Key_Enter:
+        qDebug() << "ENTER";
+        break;
+
+    case Qt::Key_Escape:
+        this->setWindowState(Qt::WindowMinimized);
+        break;
+
+    default:
+        QDialog::keyPressEvent(event);
+    }
 }

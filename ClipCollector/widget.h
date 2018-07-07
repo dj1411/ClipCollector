@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QString>
+#include <QKeyEvent>
 
 #include "const.h"
 
@@ -25,6 +26,7 @@ public:
     Widget(QDialog *parent = 0);
     ~Widget();
     void updateLabel(uint8_t idx, QString str);
+    void keyPressEvent(QKeyEvent* event);
 };
 
 #endif // WIDGET_H
