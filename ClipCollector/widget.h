@@ -26,6 +26,7 @@ public:
     ~Widget();
     void updateLabel(uint8_t idx, QString str);
     void keyPressEvent(QKeyEvent* event);
+    void focusInEvent(QFocusEvent* event);
     void selectClip(uint8_t idx);
 };
 

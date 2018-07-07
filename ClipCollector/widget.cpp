@@ -6,6 +6,9 @@
 #include <QPalette>
 
 Widget::Widget(QDialog *parent) : QDialog(parent) {
+    /* some defaults */
+    this->setFocusPolicy(Qt::StrongFocus);
+
     /* creating placeholders for clips */
     QFrame* line;
     layoutClip = new QVBoxLayout(this);
@@ -29,7 +32,6 @@ Widget::Widget(QDialog *parent) : QDialog(parent) {
 
     /* create the first clip */
     updateLabel(0, QApplication::clipboard()->text());
-    selectClip(0);
 
     /* Listen to any clipboard event */
     QObject::connect( QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(slotNewClip()) );
@@ -85,6 +87,11 @@ void Widget::keyPressEvent(QKeyEvent* event) {
     default:
         QDialog::keyPressEvent(event);
     }
+}
+
+void Widget::focusInEvent(QFocusEvent* event) {
+    selectClip(0);
+    QDialog::focusInEvent(event);
 }
 
 void Widget::selectClip(uint8_t idx) {
