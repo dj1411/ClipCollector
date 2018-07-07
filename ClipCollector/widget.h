@@ -25,6 +25,7 @@ private slots:
 public:
     Widget(QDialog *parent = 0);
     ~Widget();
+    void pushLabel(QString str);
     void updateLabel(uint8_t idx, QString str);
     void keyPressEvent(QKeyEvent* event);
     void focusInEvent(QFocusEvent* event);

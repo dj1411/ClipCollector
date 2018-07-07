@@ -42,14 +42,17 @@ Widget::~Widget() {
 
 void Widget::slotNewClip() {
     qDebug() << "New Clip: " << QApplication::clipboard()->text();
+    pushLabel(QApplication::clipboard()->text());
+}
 
+void Widget::pushLabel(QString str) {
     /* push down each label */
     for( uint8_t i=NUM_CLIPS-1; i>0; i--) {
         updateLabel(i, strClip[i-1]);
     }
 
     /* set the topmost label with clipboard content */
-    updateLabel(0, QApplication::clipboard()->text());
+    updateLabel(0, str);
 }
 
 void Widget::updateLabel(uint8_t idx, QString str) {
