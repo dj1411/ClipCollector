@@ -16,7 +16,6 @@ class Widget : public QDialog
 Q_OBJECT
     QVBoxLayout* layoutClip;
     QLabel* labelClip[NUM_CLIPS];
-    QFrame* line;
     QString strClip[NUM_CLIPS];
 
 private slots:
@@ -27,6 +26,7 @@ public:
     ~Widget();
     void updateLabel(uint8_t idx, QString str);
     void keyPressEvent(QKeyEvent* event);
+    void selectClip(uint8_t idx);
 };
 
 #endif // WIDGET_H

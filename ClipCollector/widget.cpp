@@ -7,6 +7,7 @@
 
 Widget::Widget(QDialog *parent) : QDialog(parent) {
     /* creating placeholders for clips */
+    QFrame* line;
     layoutClip = new QVBoxLayout(this);
     for( uint8_t i=0; i<NUM_CLIPS; i++) {
         labelClip[i] = new QLabel();
@@ -28,6 +29,7 @@ Widget::Widget(QDialog *parent) : QDialog(parent) {
 
     /* create the first clip */
     updateLabel(0, QApplication::clipboard()->text());
+    selectClip(0);
 
     /* Listen to any clipboard event */
     QObject::connect( QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(slotNewClip()) );
@@ -82,5 +84,15 @@ void Widget::keyPressEvent(QKeyEvent* event) {
 
     default:
         QDialog::keyPressEvent(event);
+    }
+}
+
+void Widget::selectClip(uint8_t idx) {
+    labelClip[idx]->setStyleSheet( "QLabel { color: blue }" );
+    for( uint8_t i=0; i<NUM_CLIPS; i++) {
+        if(i==idx)
+            labelClip[i]->setStyleSheet( "QLabel { color: blue }" );
+        else
+            labelClip[i]->setStyleSheet( "QLabel { color: black }" );
     }
 }
