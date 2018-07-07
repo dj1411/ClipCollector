@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <QPalette>
 
-Widget::Widget(QDialog *parent) : QDialog(parent) {
+Widget::Widget(QDialog *parent) : QDialog(parent), idxSelectedClip(0) {
     /* some defaults */
     this->setFocusPolicy(Qt::StrongFocus);
 
@@ -41,6 +41,8 @@ Widget::~Widget() {
 }
 
 void Widget::slotNewClip() {
+    qDebug() << "New Clip: " << QApplication::clipboard()->text();
+
     /* push down each label */
     for( uint8_t i=NUM_CLIPS-1; i>0; i--) {
         updateLabel(i, strClip[i-1]);
@@ -69,15 +71,18 @@ void Widget::updateLabel(uint8_t idx, QString str) {
 void Widget::keyPressEvent(QKeyEvent* event) {
     switch(event->key()) {
     case Qt::Key_Up:
-        qDebug() << "UP";
+        if(idxSelectedClip > 0)
+            idxSelectedClip--;
+        updateSelectedClip();
         break;
 
     case Qt::Key_Down:
-        qDebug() << "DOWN";
+        if(idxSelectedClip < NUM_CLIPS-1)
+            idxSelectedClip++;
+        updateSelectedClip();
         break;
 
     case Qt::Key_Enter:
-        qDebug() << "ENTER";
         break;
 
     case Qt::Key_Escape:
@@ -90,14 +95,14 @@ void Widget::keyPressEvent(QKeyEvent* event) {
 }
 
 void Widget::focusInEvent(QFocusEvent* event) {
-    selectClip(0);
+    updateSelectedClip();
     QDialog::focusInEvent(event);
 }
 
-void Widget::selectClip(uint8_t idx) {
-    labelClip[idx]->setStyleSheet( "QLabel { color: blue }" );
+void Widget::updateSelectedClip() {
+    labelClip[idxSelectedClip]->setStyleSheet( "QLabel { color: blue }" );
     for( uint8_t i=0; i<NUM_CLIPS; i++) {
-        if(i==idx)
+        if(i==idxSelectedClip)
             labelClip[i]->setStyleSheet( "QLabel { color: blue }" );
         else
             labelClip[i]->setStyleSheet( "QLabel { color: black }" );

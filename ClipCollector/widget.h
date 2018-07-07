@@ -17,6 +17,7 @@ Q_OBJECT
     QVBoxLayout* layoutClip;
     QLabel* labelClip[NUM_CLIPS];
     QString strClip[NUM_CLIPS];
+    uint8_t idxSelectedClip;
 
 private slots:
     void slotNewClip();
@@ -27,7 +28,7 @@ public:
     void updateLabel(uint8_t idx, QString str);
     void keyPressEvent(QKeyEvent* event);
     void focusInEvent(QFocusEvent* event);
-    void selectClip(uint8_t idx);
+    void updateSelectedClip();
 };
 
 #endif // WIDGET_H
