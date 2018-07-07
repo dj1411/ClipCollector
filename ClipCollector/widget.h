@@ -16,7 +16,7 @@ class Widget : public QWidget
     QLabel* labelClip[NUM_CLIP];
 
 private slots:
-    void handleNewClip();
+    void slotNewClip();
 
 public:
     Widget(QWidget *parent = 0);

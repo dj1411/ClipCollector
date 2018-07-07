@@ -20,13 +20,14 @@ Widget::Widget(QWidget *parent) : QWidget(parent) {
         layoutClip->addWidget(line);
     }
 
-    QObject::connect( QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(handleNewClip()) );
+    /* Listen to any clipboard event */
+    QObject::connect( QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(slotNewClip()) );
 }
 
 Widget::~Widget() {
 }
 
-void Widget::handleNewClip() {
+void Widget::slotNewClip() {
     qDebug() << "New clip: " << QApplication::clipboard()->text();
 
     for( uint8_t i=NUM_CLIP-1; i!=0; i--) {
