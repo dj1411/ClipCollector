@@ -11,14 +11,14 @@ Widget::Widget(QDialog *parent) : QDialog(parent) {
     createLabel(0, QApplication::clipboard()->text());
 
     /* setting the geometry for the main window */
-//    QRect screen = QApplication::desktop()->screenGeometry();
-//    uint16_t heightTaskbar = screen.height() - QApplication::desktop()->availableGeometry().height();
-//    uint16_t heightWindow = (labelClip[0]->sizeHint().height() + line->sizeHint().height()) * NUM_CLIPS;
-//    this->setGeometry(screen.width() - WIDTH_WINDOW,
-//                      screen.height() - heightWindow - heightTaskbar,
-//                      WIDTH_WINDOW,
-//                      heightWindow);
-//    this->setFixedSize(WIDTH_WINDOW, heightWindow);
+    QRect screen = QApplication::desktop()->screenGeometry();
+    uint16_t heightTaskbar = screen.height() - QApplication::desktop()->availableGeometry().height();
+    uint16_t heightWindow = (labelClip[0]->sizeHint().height() + line->sizeHint().height()) * NUM_CLIPS;
+    this->setGeometry(screen.width() - WIDTH_WINDOW,
+                      screen.height() - heightWindow - heightTaskbar,
+                      WIDTH_WINDOW,
+                      heightWindow);
+    this->setFixedSize(WIDTH_WINDOW, heightWindow);
 
 //    /* creating placeholders for clips */
 //    layoutClip = new QVBoxLayout(this);
@@ -57,6 +57,8 @@ void Widget::createLabel(uint8_t idx, QString str) {
         str.resize(LENGTH_CLIP);
     if( str.indexOf('\n') != -1 )
         str.resize(str.indexOf('\n'));
+    if(str.length() != strClip[idx].length())
+        str.append("...");
 
     /* display the string */
     labelClip[idx] = new QLabel(str);
