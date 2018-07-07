@@ -28,4 +28,5 @@ SOURCES += \
         widget.cpp
 
 HEADERS += \
-        widget.h
+        widget.h \
+    const.h
