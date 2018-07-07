@@ -3,11 +3,11 @@
 
 #include <QApplication>
 #include <QDesktopWidget>
-#include <QWidget>
+#include <QDialog>
 #include <QVBoxLayout>
 #include <QLabel>
 
-class Widget : public QWidget
+class Widget : public QDialog
 {
     Q_OBJECT
     static constexpr uint8_t NUM_CLIP = 10;
@@ -19,7 +19,7 @@ private slots:
     void slotNewClip();
 
 public:
-    Widget(QWidget *parent = 0);
+    Widget(QDialog *parent = 0);
     ~Widget();
 };
 

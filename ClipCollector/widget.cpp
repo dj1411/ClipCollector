@@ -3,10 +3,11 @@
 #include <QClipboard>
 #include <QDebug>
 
-Widget::Widget(QWidget *parent) : QWidget(parent) {
+Widget::Widget(QDialog *parent) : QDialog(parent) {
     /* setting the geometry for the main window */
     QRect rect = QApplication::desktop()->screenGeometry();
     this->setGeometry(rect.width() - 300, rect.height() - 400, 300, 400);
+    this->setFixedSize(300, 400);
 
     /* creating placeholders for clips */
     QFrame* line;
@@ -28,10 +29,11 @@ Widget::~Widget() {
 }
 
 void Widget::slotNewClip() {
-    qDebug() << "New clip: " << QApplication::clipboard()->text();
-
+    /* push down each label */
     for( uint8_t i=NUM_CLIP-1; i!=0; i--) {
         labelClip[i]->setText(labelClip[i-1]->text());
     }
+
+    /* set the topmost label with clipboard content */
     labelClip[0]->setText(QApplication::clipboard()->text());
 }
