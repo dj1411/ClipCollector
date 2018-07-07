@@ -27,7 +27,7 @@ Widget::Widget(QDialog *parent) : QDialog(parent) {
     this->setFixedSize(WIDTH_WINDOW, heightWindow);
 
     /* create the first clip */
-//    createLabel(0, QApplication::clipboard()->text());
+    updateLabel(0, QApplication::clipboard()->text());
 
     /* Listen to any clipboard event */
 //    QObject::connect( QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(slotNewClip()) );
@@ -46,7 +46,7 @@ void Widget::slotNewClip() {
 //    labelClip[0]->setText(QApplication::clipboard()->text());
 }
 
-void Widget::createLabel(uint8_t idx, QString str) {
+void Widget::updateLabel(uint8_t idx, QString str) {
     /* set the clip as string */
     strClip[idx] = str;
 
@@ -59,9 +59,5 @@ void Widget::createLabel(uint8_t idx, QString str) {
         str.append("...");
 
     /* display the string */
-    labelClip[idx] = new QLabel(str);
-    layoutClip->addWidget(labelClip[idx]);
-    line = new QFrame;
-    line->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-    layoutClip->addWidget(line);
+    labelClip[idx]->setText(str);
 }

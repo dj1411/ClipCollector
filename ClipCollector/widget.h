@@ -24,7 +24,7 @@ private slots:
 public:
     Widget(QDialog *parent = 0);
     ~Widget();
-    void createLabel(uint8_t idx, QString str);
+    void updateLabel(uint8_t idx, QString str);
 };
 
 #endif // WIDGET_H
