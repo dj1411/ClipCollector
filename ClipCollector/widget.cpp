@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <QPalette>
 
-Widget::Widget(QDialog *parent) : QDialog(parent), idxSelectedClip(0) {
+Widget::Widget(QWidget *parent) : QWidget(parent), idxSelectedClip(0) {
     /* some defaults */
     this->setFocusPolicy(Qt::StrongFocus);
 
@@ -99,13 +99,13 @@ void Widget::keyPressEvent(QKeyEvent* event) {
         break;
 
     default:
-        QDialog::keyPressEvent(event);
+        QWidget::keyPressEvent(event);
     }
 }
 
 void Widget::focusInEvent(QFocusEvent* event) {
     highlightSelectedClip();
-    QDialog::focusInEvent(event);
+    QWidget::focusInEvent(event);
 }
 
 void Widget::highlightSelectedClip() {

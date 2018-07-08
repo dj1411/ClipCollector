@@ -3,7 +3,7 @@
 
 #include <QApplication>
 #include <QDesktopWidget>
-#include <QDialog>
+#include <QWidget>
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QString>
@@ -11,7 +11,7 @@
 
 #include "const.h"
 
-class Widget : public QDialog
+class Widget : public QWidget
 {
 Q_OBJECT
     QVBoxLayout* layoutClip;
@@ -23,7 +23,7 @@ private slots:
     void slotNewClip();
 
 public:
-    Widget(QDialog *parent = 0);
+    Widget(QWidget *parent = 0);
     ~Widget();
     void pushLabel(QString str);
     void updateLabel(uint8_t idx, QString str);
